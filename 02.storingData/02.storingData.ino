@@ -1,5 +1,5 @@
 /*
-  Author: 
+  Author: Vladimir G 14-8-2024
   
   Learning Intention:
   The students will learn about the different data types used in the C++ language
@@ -19,10 +19,17 @@
     https://www.arduino.cc/reference/en/language/variables/data-types/stringobject/
 */
 
+int myInt = 3;
+int myIntValue = 5;
+String myString = ("Hello World");
+float myFloatingPoint = 3.14;
+bool myValue = false;
+
+
 void setup() {
-  
+  Serial.begin(9600);
+  Serial.println(myString + " :" + myIntValue);
 }
 
 void loop() {
-
 }
