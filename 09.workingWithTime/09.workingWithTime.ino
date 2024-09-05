@@ -1,5 +1,5 @@
 /*
-  Author: 
+  Author: Vladimir G 5/9/24
 
   Learning Intention:
   The students understand how time is used in microcontrollers and best practices
@@ -18,12 +18,29 @@
 */
 
 
-void setup() {
-  
+static unsigned int blueLED = 6;
+static unsigned int greenLED = 2;
+unsigned int blueLEDstate = LOW;
+unsigned int greenLEDstate = LOW;
+
+// Generally, you should use "unsigned long" for variables that hold time
+// The value will quickly become too large fot an int to store
+unsigned long blueLEDPreviousMillis = 0;
+unsigned long greenLEDPreviousMillis = 0;
+
+// Use a long so you can mathametically compare the variable previousMillis without conversion
+const unsigned long blueLEDinterval = 2000;
+const unsigned long greenLEDinterval = 9000;
+
+void setup() 
+{
+  Serial.begin(9600);
+
 }
 
 
-void loop() {
-  
+void loop() 
+{
+
 }
 
