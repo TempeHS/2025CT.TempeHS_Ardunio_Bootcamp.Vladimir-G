@@ -20,8 +20,8 @@
 
 static unsigned int blueLED = 6;
 static unsigned int greenLED = 2;
-unsigned int blueLEDstate = LOW;
-unsigned int greenLEDstate = LOW;
+unsigned int blueLEDState = LOW;
+unsigned int greenLEDState = LOW;
 
 // Generally, you should use "unsigned long" for variables that hold time
 // The value will quickly become too large fot an int to store
@@ -35,12 +35,41 @@ const unsigned long greenLEDinterval = 9000;
 void setup() 
 {
   Serial.begin(9600);
-
+  Serial.println("Debug");
+  pinMode(blueLED, OUTPUT);
+  pinMode(greenLED, OUTPUT);
 }
 
 
 void loop() 
 {
+  // check to see if it's time to blink the LED; that is, if the difference
+  // between the current time and last time you blinked the LED is bigger than
+  // the interval at which you want to blink the LED.
+  unsigned long currentMillis = millis();
+
+    if (currentMillis - blueLEDPreviousMillis >= blueLEDinterval);
+  {
+    blueLEDState = !blueLEDState;
+    digitalWrite(blueLED, blueLEDState);
+    blueLEDPreviousMillis = currentMillis;
+  }
+
+  if (currentMillis - greenLEDPreviousMillis >= greenLEDinterval);
+  {
+    greenLEDState = !greenLEDState;
+    digitalWrite(greenLED, greenLEDState);
+    greenLEDPreviousMillis = currentMillis;
+  }
+  
+  Serial.print("millis:");
+  Serial.print(currentMillis);
+  Serial.print(",");
+  Serial.print("blueLED:");
+  Serial.print(blueLEDState);
+  Serial.print(",");
+  Serial.print("greenLED:");
+  Serial.println(greenLEDState);
 
 }
 
