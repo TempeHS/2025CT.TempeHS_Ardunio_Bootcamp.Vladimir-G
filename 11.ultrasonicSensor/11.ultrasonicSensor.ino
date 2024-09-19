@@ -31,7 +31,10 @@ Servo myservo;
 Ultrasonic mysensor(5);
 
 unsigned static int servoPin = 7;
-unsigned static int potpin = A2;
+
+unsigned int mysensorState = true;
+unsigned long mysensorPreviousMillis = 0;
+const unsigned long mysensorInterval = 5000;
 
 void setup() 
 {
@@ -41,18 +44,23 @@ void setup()
 
 void loop() 
 {
+  unsigned long currentMillis = millis();
+
       if (mysensor.distanceRead() >= 10)
   {
-    int val = analogRead(potpin);
-    val = map(val, 0, 100, 90, 180);
+    int val = map(val, 0, 100, 90, 180);
     myservo.write(val);
   }
 
+    while (currentMillis - mysensorPreviousMillis >= mysensorInterval);
+  {
+    mysensorState = !mysensorState;
+    mysensorPreviousMillis = currentMillis;
+  }
 
       if (mysensor.distanceRead() <= 10)
   {
-    int val = analogRead(potpin);
-    val = map(val, 100, 0, 90, 180);
+    int val = map(val, 100, 0, 90, 180);
     myservo.write(val);
   }
 }
