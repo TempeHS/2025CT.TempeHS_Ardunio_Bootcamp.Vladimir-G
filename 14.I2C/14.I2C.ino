@@ -26,31 +26,39 @@
     Air Pressure Sensor: https://github.com/TempeHS/TempeHS_Ardunio_Boilerplate/blob/main/TempeHS_Sensor_Catalogue/Sensor%20Kit/Air_Pressure_Sensor/Air_Pressure_Sensor.ino
 */
 
-#include <Arduino.h>
-#include <U8g2lib.h>
-#include <Wire.h>
-
-unsigned int x = 60;
-unsigned int y = 35;
-
-U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);  // High speed I2C
-
-// U8G2_SSD1306_128X64_NONAME_F_SW_I2C u8g2(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);    //Low spped I2C
-
-void setup(void) 
+#include "Arduino_SensorKit.h"
+ 
+unsigned int x = 112;
+unsigned int y = 15;
+ 
+void setup()
 {
-  u8g2.begin();
+  Oled.begin();
+  Oled.setFlipMode(true);
+  Serial.begin(9600);
+  Accelerometer.begin();
 }
-
-void loop(void) 
+ 
+void loop()
 {
-  while (!gameOver())
-  {
-    u8g2.clearBuffer();                   // clear the internal memory
-    u8g2.setFont(u8g2_font_ncenB08_tr);   // choose a suitable font
-    u8g2.setCursor(x, y);
-    u8g2.print("O");
-    u8g2.sendBuffer();                    // transfer internal memory to the display
+ while (!gameOver())
+ {
+    Oled.setFont(u8x8_font_chroma48medium8_r);   // choose a suitable font
+    Oled.setCursor(x, y);
+    Oled.print("O");    // write something to the internal memory
     delay(100);
+   
+ 
+
+  Serial.print("x:");
+  Serial.print(Accelerometer.readX());
+  Serial.print("  ");
+  Serial.print("y:");
+  Serial.print(Accelerometer.readY());        
+  Serial.print("  ");
+  Serial.print("z:");
+  Serial.println(Accelerometer.readZ());
+ 
+  delay(500);
   }
 }

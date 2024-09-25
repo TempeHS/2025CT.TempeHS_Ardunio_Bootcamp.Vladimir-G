@@ -45,6 +45,7 @@ void setup()
 void loop() 
 {
   unsigned long currentMillis = millis();
+  int val = mysensor.distanceRead();
 
       if (mysensor.distanceRead() >= 10)
   {
