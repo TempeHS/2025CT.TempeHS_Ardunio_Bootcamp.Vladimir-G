@@ -28,8 +28,8 @@
 
 #include "Arduino_SensorKit.h"
  
-unsigned int x = 112;
-unsigned int y = 15;
+unsigned int x = 60;
+unsigned int y = 35;
  
 void setup()
 {
@@ -49,7 +49,7 @@ void loop()
     delay(100);
    
  
-
+ }
   Serial.print("x:");
   Serial.print(Accelerometer.readX());
   Serial.print("  ");
@@ -60,5 +60,5 @@ void loop()
   Serial.println(Accelerometer.readZ());
  
   delay(500);
-  }
+ 
 }
