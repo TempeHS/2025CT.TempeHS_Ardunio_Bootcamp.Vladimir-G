@@ -27,6 +27,86 @@
 */
 
 #include "Arduino_SensorKit.h"
+
+// Uncomment line below if your SensorKit is the variant with the DHT20 sensor
+// (It's marked IIC on the PCB and has a black cover, while the DHT11 sensor
+// has a blue cover.)
+//#define Environment Environment_I2C
+
+void setup() {
+  // Uncomment line below if your kit has a DHT11 and you're connecting it to 
+  // a pin different than 3
+  //Environment.setPin(4);
+
+  Serial.begin(9600);
+  Environment.begin();
+}
+
+void loop() {
+  Serial.print("Temperature = ");
+  Serial.print(Environment.readTemperature()); //print temperature
+  Serial.println(" C");
+  Serial.print("Humidity = ");
+  Serial.print(Environment.readHumidity()); //print humidity
+  Serial.println(" %");
+  delay(2000);
+}
+
+
+
+/*
+
+#include "Arduino_SensorKit.h"
+
+void setup() {
+  Oled.begin();
+  Oled.setFlipMode(true);
+}
+
+void loop() {
+  int random_value = random(0, 1023);   // create a random value
+
+  Oled.setFont(u8x8_font_chroma48medium8_r); 
+  Oled.setCursor(0, 3);
+  Oled.print("Value: ");
+  Oled.print(random_value);
+  delay(1000);
+}
+
+
+//
+
+
+#include "Arduino_SensorKit.h"
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  while(!Serial);
+  
+  Accelerometer.begin();
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  // 3 axis
+  Serial.print("x:"); 
+  Serial.print(Accelerometer.readX()); 
+  Serial.print("  ");
+  Serial.print("y:"); 
+  Serial.print(Accelerometer.readY());        
+  Serial.print("  ");
+  Serial.print("z:"); 
+  Serial.println(Accelerometer.readZ());
+ 
+  delay(500);
+}
+
+
+//
+
+
+#include "Arduino_SensorKit.h"
  
 unsigned int x = 112;
 unsigned int y = 15;
@@ -62,3 +142,5 @@ void loop()
   delay(500);
   }
 }
+
+*/
